@@ -9,17 +9,19 @@
 <body>
     <div class="main-cont">
         <ul id="list-cont">
-            <li class="list-header">
+            <li class="list-header prev-item">
                 <h4>To Do List</h4>
                 <a href="javascript:void(0)"><i class="fa fa-refresh"></i></a>
             </li>
-            <li class="input-box">
-                <input type="text" name="todo-item" id="todo-item" placeholder="Add to your list...">
-                <a href="javascript:void(0)"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+            <li class="input-box prev-item">
+                <form id="form-field">
+                    <input type="text" name="desc" id="input-field" placeholder="Add to your list..." autofocus>
+                    <button type="submit" id="add-item-btn"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                </form>
             </li>
         </ul>
         <div class="reset-box">
-            <a href="javascript:void(0)" >Clear all completed</a>
+            <a href="javascript:void(0)" id="clear-completed">Clear all completed</a>
         </div>
     </div>
 </body>

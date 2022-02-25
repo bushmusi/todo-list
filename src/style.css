@@ -63,6 +63,45 @@ label > h4 {
   margin-left: 10px;
 }
 
+.active-li {
+  background-color: rgb(192, 162, 27);
+}
+
+form {
+  display: flex;
+  width: 100vw;
+  padding: var(--padding);
+  border-bottom: solid 1px var(--color);
+}
+
+form > input[type='text'] {
+  border: none;
+  flex: 2;
+  outline: none;
+  font-family: var(--lato-font);
+  font-style: italic;
+  font-weight: 500;
+  background: transparent;
+  color: var(--color);
+}
+
+.label-item-edit {
+  display: flow-root;
+  margin-left: 10px;
+  width: 90%;
+}
+
+.label-item-edit > input[type='text'] {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: var(--congo-font);
+  font-style: italic;
+  font-size: small;
+  background: transparent;
+  color: var(--color);
+}
+
 .list-header {
   display: flow-root;
   padding: var(--padding);
@@ -95,20 +134,24 @@ label > h4 {
 
 .input-box {
   display: flex;
-  padding: var(--padding);
-  border-bottom: solid 1px var(--color);
 }
 
-.input-box > input {
+form > button {
+  float: right;
   border: none;
-  flex: 2;
-  outline: none;
-  font-style: italic;
-  color: var(--color);
+  cursor: pointer;
 }
 
-input:placeholder-shown {
+form > input:placeholder-shown {
   font-style: italic;
+}
+
+.todo-item > input[type=checkbox] {
+  float: left;
+  position: initial;
+  margin-top: 4px;
+  cursor: pointer;
+  background: transparent;
 }
 
 .reset-box {

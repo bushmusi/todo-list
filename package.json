@@ -1,0 +1,44 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "![](https://img.shields.io/badge/Microverse-blueviolet)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "start": "webpack serve --mode development --open 'Google Chrome'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bushmusi/todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bushmusi/todo-list/issues"
+  },
+  "homepage": "https://github.com/bushmusi/todo-list#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.4",
+    "hint": "^6.1.9",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.21.0",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}

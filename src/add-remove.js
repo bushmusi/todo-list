@@ -142,6 +142,7 @@ export default class Todo {
     currentLi.appendChild(checkbox);
     currentLi.appendChild(label);
     currentLi.appendChild(trashIcon);
+    currentLi.style.display = 'flex';
 
     textInput.addEventListener('change', (event) => {
       this.updateItem(event, 'text');

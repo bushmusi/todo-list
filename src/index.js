@@ -1,41 +1,30 @@
 import './style.css';
+import Todo from './add-remove.js';
 
-const TODOLIST = [
-  {
-    description: 'I will call dave',
-    completed: true,
-    index: 0,
-  },
-  {
-    description: 'I will write love letter',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Got to Gym',
-    completed: true,
-    index: 2,
-  },
-];
+const addRemoveObj = new Todo();
+const { form } = addRemoveObj;
+form.addEventListener('submit', addRemoveObj.addElement);
+addRemoveObj.itemList();
+addRemoveObj.todoInputBox.focus();
 
-const ITMELIST = (TODOLIST) => {
-  const listCont = document.getElementById('list-cont');
-
-  TODOLIST.forEach((item) => {
-    const element = document.createElement('li');
-    element.className = 'todo-item';
-    const label = document.createElement('label');
-    const inputBox = document.createElement('input');
-    inputBox.type = 'checkbox';
-    inputBox.id = item.index;
-    label.appendChild(inputBox);
-    label.innerHTML += `<h4>${item.description}</h4>`;
-    element.appendChild(label);
-    const optIcon = document.createElement('i');
-    optIcon.classList = 'fa fa-ellipsis-v';
-    element.appendChild(optIcon);
-    listCont.appendChild(element);
+const multipleDelete = (event) => {
+  const checkedItems = document.querySelectorAll('input[type=checkbox]:checked');
+  const filtIds = [];
+  checkedItems.forEach((item, index) => {
+    const [, id] = item.id.split('-');
+    filtIds.push(parseInt(id, 10));
   });
+  let itemList = JSON.parse(localStorage.getItem('todo-list'));
+  itemList = itemList.filter((val, index) => filtIds.indexOf(val.index) === -1);
+  itemList.forEach((val, index) => {
+    val.index = index + 1;
+  });
+  localStorage.setItem('todo-list', JSON.stringify(itemList));
+
+  addRemoveObj.itemList();
 };
 
-ITMELIST(TODOLIST);
+const clearAllElement = document.getElementById('clear-completed');
+clearAllElement.addEventListener('click', (event) => {
+  multipleDelete(event);
+});

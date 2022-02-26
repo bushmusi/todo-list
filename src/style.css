@@ -160,7 +160,7 @@ form > input:placeholder-shown {
   justify-content: center;
   height: 67px;
   align-items: center;
-  width: 50%;
+  width: 75%;
   background-color: #e5e1de;
 }
 
@@ -174,5 +174,15 @@ form > input:placeholder-shown {
     width: 50%;
     background-color: white;
     z-index: 2;
+  }
+
+  .reset-box {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    height: 67px;
+    align-items: center;
+    width: 50%;
+    background-color: #e5e1de;
   }
 }

@@ -169,7 +169,7 @@ export default class Todo {
       index: indexNum,
     };
 
-    if (val !== null) {
+    if (val !== '' && val !== ' ') {
       items.push(objItem);
       localStorage.setItem('todo-list', JSON.stringify(items));
       this.INPUT_ELEMENT.value = '';

@@ -2,6 +2,7 @@ export default class Todo {
   constructor() {
     this.INPUT_ELEMENT = document.getElementById('input-field');
     this.form = document.getElementById('form-field');
+    this.todoInputBox = document.getElementById('input-field');
     this.labelID = '';
   }
 
@@ -54,7 +55,6 @@ export default class Todo {
 
       element.appendChild(inputBox);
 
-      // label.innerHTML = `<h4 id='text-id-${item.index}'>${item.description}</h4>`;
       const textTag = document.createElement('h4');
       textTag.id = `text-id-${item.index}`;
       textTag.textContent = `${item.description}`;
@@ -74,6 +74,7 @@ export default class Todo {
       inputBox.addEventListener('click', (event) => {
         this.updateItem(event, 'checkbox');
       });
+      this.todoInputBox.focus();
     });
   };
 
@@ -82,13 +83,14 @@ export default class Todo {
     currentList = currentList === null ? [] : currentList;
     const currentInboxID = event.srcElement.id;
     const [, id] = currentInboxID.split('-');
-
+    const currentElement = currentList.filter((val, index) => val.index === parseInt(id, 10));
+    const currentElementIndex = currentList.indexOf(currentElement[0]);
     const newObj = {
-      description: type === 'text' ? event.srcElement.value : currentList[id].description,
-      index: id,
-      completed: type !== 'text' ? event.srcElement.checked : currentList[id].completed,
+      description: type === 'text' ? event.srcElement.value : currentElement[0].description,
+      index: currentElement[0].index,
+      completed: type !== 'text' ? event.srcElement.checked : currentElement[0].completed,
     };
-    currentList[id] = newObj;
+    currentList[currentElementIndex] = newObj;
     localStorage.setItem('todo-list', JSON.stringify(currentList));
     this.itemList();
   }
@@ -117,14 +119,12 @@ export default class Todo {
     const { description, index, completed } = this.fetchCurrentItems(id);
     currentLi.innerHTML = '';
 
-    // ! Create checkbox element
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.className = 'checkbox-item';
     checkbox.id = `checkbox-${index}`;
     checkbox.checked = completed;
 
-    // ! below we will add label inside that we have to add text input
     const label = document.createElement('label');
     label.className = 'label-item-edit';
     const textInput = document.createElement('input');
@@ -135,12 +135,10 @@ export default class Todo {
     textInput.value = description;
     label.appendChild(textInput);
 
-    // ! Create option icon
     const trashIcon = document.createElement('i');
     trashIcon.id = `option-${index}`;
     trashIcon.className = 'fa fa-trash option-menu';
 
-    // ! here we will add to our base li tag both input, label & i element
     currentLi.appendChild(checkbox);
     currentLi.appendChild(label);
     currentLi.appendChild(trashIcon);
@@ -163,10 +161,11 @@ export default class Todo {
     const val = this.form.elements.desc.value;
     let items = JSON.parse(localStorage.getItem('todo-list'));
     items = items === null ? [] : items;
+    const indexNum = items.length + 1;
     const objItem = {
       description: val,
       completed: false,
-      index: items.length,
+      index: indexNum,
     };
 
     if (val !== null) {

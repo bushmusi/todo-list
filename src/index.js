@@ -5,6 +5,7 @@ const addRemoveObj = new Todo();
 const { form } = addRemoveObj;
 form.addEventListener('submit', addRemoveObj.addElement);
 addRemoveObj.itemList();
+addRemoveObj.todoInputBox.focus();
 
 const multipleDelete = (event) => {
   const checkedItems = document.querySelectorAll('input[type=checkbox]:checked');
@@ -14,9 +15,9 @@ const multipleDelete = (event) => {
     filtIds.push(parseInt(id, 10));
   });
   let itemList = JSON.parse(localStorage.getItem('todo-list'));
-  itemList = itemList.filter((val, index) => filtIds.indexOf(index) === -1);
+  itemList = itemList.filter((val, index) => filtIds.indexOf(val.index) === -1);
   itemList.forEach((val, index) => {
-    val.index = index;
+    val.index = index + 1;
   });
   localStorage.setItem('todo-list', JSON.stringify(itemList));
 

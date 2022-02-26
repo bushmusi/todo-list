@@ -142,6 +142,7 @@ export default class Todo {
     currentLi.appendChild(checkbox);
     currentLi.appendChild(label);
     currentLi.appendChild(trashIcon);
+    currentLi.style.display = 'flex';
 
     textInput.addEventListener('change', (event) => {
       this.updateItem(event, 'text');
@@ -168,7 +169,7 @@ export default class Todo {
       index: indexNum,
     };
 
-    if (val !== null) {
+    if (val !== '' && val !== ' ') {
       items.push(objItem);
       localStorage.setItem('todo-list', JSON.stringify(items));
       this.INPUT_ELEMENT.value = '';

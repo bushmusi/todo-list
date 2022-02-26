@@ -30,8 +30,8 @@ To get a local copy up and running follow these simple example steps.
 ## Setup
 - `git clone https://github.com/bushmusi/todo-list.git`
 - `cd todo-list/`
-- `npm install`
-- `npm run dev`
+- Install packages:  `npm install`
+- Start Live Server: `npm start`
 
 -Follow the HTML-CSS linter confuguration to docs to setup linters [Link to Microverse linter docs](https://github.com/bushmusi/linters-config/tree/master/html-css-js)
 

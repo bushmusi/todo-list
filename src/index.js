@@ -7,6 +7,9 @@ form.addEventListener('submit', addRemoveObj.addElement);
 addRemoveObj.itemList();
 addRemoveObj.todoInputBox.focus();
 
+const refreshIcon = document.getElementById('refresh-link');
+refreshIcon.addEventListener('click', () => addRemoveObj.itemList());
+
 const multipleDelete = (event) => {
   const checkedItems = document.querySelectorAll('input[type=checkbox]:checked');
   const filtIds = [];

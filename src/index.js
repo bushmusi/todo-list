@@ -15,9 +15,14 @@ const multipleDelete = (event) => {
   const filtIds = [];
   checkedItems.forEach((item, index) => {
     const [, id] = item.id.split('-');
-    filtIds.push(parseInt(id, 10));
+    filtIds.push(+id);
   });
-  let itemList = JSON.parse(localStorage.getItem('todo-list'));
+  let itemList = [];
+  try {
+    itemList = JSON.parse(localStorage.getItem('todo-list'));
+  } catch (e) {
+    throw new Error(`Error occured: ${e}`);
+  }
   itemList = itemList.filter((val, index) => filtIds.indexOf(val.index) === -1);
   itemList.forEach((val, index) => {
     val.index = index + 1;

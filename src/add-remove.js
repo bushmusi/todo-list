@@ -1,6 +1,5 @@
 export default class Todo {
   constructor() {
-    this.INPUT_ELEMENT = document.getElementById('input-field');
     this.form = document.getElementById('form-field');
     this.todoInputBox = document.getElementById('input-field');
     this.labelID = '';
@@ -35,7 +34,12 @@ export default class Todo {
     listCont.innerHTML = '';
     permaNode.forEach((item) => listCont.appendChild(item));
 
-    let todoList = JSON.parse(localStorage.getItem('todo-list'));
+    let todoList = [];
+    try {
+      todoList = JSON.parse(localStorage.getItem('todo-list'));
+    } catch (e) {
+      throw new Error(`Error occured: ${e}`);
+    }
     todoList = todoList === null ? [] : todoList;
 
     todoList.forEach((item) => {
@@ -58,7 +62,7 @@ export default class Todo {
       const textTag = document.createElement('h4');
       textTag.id = `text-id-${item.index}`;
       textTag.textContent = `${item.description}`;
-      textTag.style.textDecoration = item.completed === true ? 'line-through' : 'none';
+      textTag.style.textDecoration = item.completed ? 'line-through' : 'none';
       label.appendChild(textTag);
       label.addEventListener('click', this.editDelete);
       element.appendChild(label);
@@ -79,11 +83,16 @@ export default class Todo {
   };
 
   updateItem = (event, type) => {
-    let currentList = JSON.parse(localStorage.getItem('todo-list'));
+    let currentList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem('todo-list'));
+    } catch (e) {
+      throw new Error(`Error ocurred: ${e}`);
+    }
     currentList = currentList === null ? [] : currentList;
     const currentInboxID = event.srcElement.id;
     const [, id] = currentInboxID.split('-');
-    const currentElement = currentList.filter((val, index) => val.index === parseInt(id, 10));
+    const currentElement = currentList.filter((val, index) => val.index === +id);
     const currentElementIndex = currentList.indexOf(currentElement[0]);
     const newObj = {
       description: type === 'text' ? event.srcElement.value : currentElement[0].description,
@@ -97,11 +106,11 @@ export default class Todo {
 
   deleteItem = (event) => {
     let [, id] = event.srcElement.id.split('-');
-    id = parseInt(id, 10);
+    id = +id;
     let taskItemList = JSON.parse(localStorage.getItem('todo-list'));
-    taskItemList = taskItemList.filter((word, el) => el !== id);
+    taskItemList = taskItemList.filter((word, el) => el + 1 !== id);
     taskItemList.forEach((value, index) => {
-      value.index = index;
+      value.index = index + 1;
     });
     localStorage.setItem('todo-list', JSON.stringify(taskItemList));
     this.itemList();
@@ -160,7 +169,12 @@ export default class Todo {
   addElement = (e) => {
     e.preventDefault();
     const val = this.form.elements.desc.value;
-    let items = JSON.parse(localStorage.getItem('todo-list'));
+    let items = [];
+    try {
+      items = JSON.parse(localStorage.getItem('todo-list'));
+    } catch (e) {
+      throw new Error(`Error occured: ${e}`);
+    }
     items = items === null ? [] : items;
     const indexNum = items.length + 1;
     const objItem = {
@@ -172,7 +186,7 @@ export default class Todo {
     if (val !== '' && val !== ' ') {
       items.push(objItem);
       localStorage.setItem('todo-list', JSON.stringify(items));
-      this.INPUT_ELEMENT.value = '';
+      this.todoInputBox.value = '';
       this.itemList();
     }
   };

@@ -76,13 +76,13 @@ export default class Todo {
       element.appendChild(optIcon);
       listCont.appendChild(element);
       inputBox.addEventListener('click', (event) => {
-        this.updateItem(event, 'checkbox');
+        this.updateItem({ event, type: 'checkbox' });
       });
       this.todoInputBox.focus();
     });
   };
 
-  updateItem = (event, type) => {
+  updateItem = ({ event, type }) => {
     let currentList = [];
     try {
       currentList = JSON.parse(localStorage.getItem('todo-list'));
@@ -148,17 +148,15 @@ export default class Todo {
     trashIcon.id = `option-${index}`;
     trashIcon.className = 'fa fa-trash option-menu';
 
-    currentLi.appendChild(checkbox);
-    currentLi.appendChild(label);
-    currentLi.appendChild(trashIcon);
+    [checkbox, label, trashIcon].forEach((item) => currentLi.appendChild(item));
     currentLi.style.display = 'flex';
 
     textInput.addEventListener('change', (event) => {
-      this.updateItem(event, 'text');
+      this.updateItem({ event, type: 'text' });
     });
 
     checkbox.addEventListener('click', (event) => {
-      this.updateItem(event, 'checkbox');
+      this.updateItem({ event, type: 'checkbox' });
     });
 
     trashIcon.addEventListener('click', (event) => {

@@ -26,6 +26,18 @@ html {
   color: var(--color);
 }
 
+header {
+  padding: var(--padding);
+  background-color: white;
+}
+
+section > h1 {
+  text-align: center;
+  font-size: larger;
+  font-weight: 600;
+  font-family: var(--congo-font);
+}
+
 ul {
   list-style: none;
 }
@@ -103,13 +115,15 @@ form > input[type='text'] {
 }
 
 .list-header {
-  display: flow-root;
+  display: flex;
+  height: 60px;
+  align-items: center;
   padding: var(--padding);
   border-bottom: solid 1px var(--color);
 }
 
-.list-header > h4 {
-  float: left;
+.list-header > h2 {
+  flex: 2;
 }
 
 .list-header > a {

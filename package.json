@@ -4,7 +4,7 @@
   "description": "![](https://img.shields.io/badge/Microverse-blueviolet)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "webpack --mode development",
     "start": "webpack serve --mode development"
   },
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/bushmusi/todo-list#readme",
   "devDependencies": {
     "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",

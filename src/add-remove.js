@@ -1,3 +1,7 @@
+import addVal from './components/add-val.js';
+import domElement from './components/append-li.js';
+import deleteLi from './components/delete-val.js';
+
 export default class Todo {
   constructor() {
     this.form = document.getElementById('form-field');
@@ -107,13 +111,9 @@ export default class Todo {
   deleteItem = (event) => {
     let [, id] = event.srcElement.id.split('-');
     id = +id;
-    let taskItemList = JSON.parse(localStorage.getItem('todo-list'));
-    taskItemList = taskItemList.filter((word, el) => el + 1 !== id);
-    taskItemList.forEach((value, index) => {
-      value.index = index + 1;
-    });
-    localStorage.setItem('todo-list', JSON.stringify(taskItemList));
-    this.itemList();
+    deleteLi(id);
+    const liItem = document.getElementById(`li-${id}`);
+    liItem.remove();
   }
 
   editDelete = (e) => {
@@ -162,30 +162,21 @@ export default class Todo {
     trashIcon.addEventListener('click', (event) => {
       this.deleteItem(event);
     });
+
+    return true;
   }
 
   addElement = (e) => {
     e.preventDefault();
     const val = this.form.elements.desc.value;
-    let items = [];
-    try {
-      items = JSON.parse(localStorage.getItem('todo-list'));
-    } catch (e) {
-      throw new Error(`Error occured: ${e}`);
-    }
-    items = items === null ? [] : items;
-    const indexNum = items.length + 1;
-    const objItem = {
-      description: val,
-      completed: false,
-      index: indexNum,
-    };
+    const objItem = addVal(val);
+    this.todoInputBox.value = '';
+    const [label, checkBox, optIcon] = domElement(objItem);
 
-    if (val !== '' && val !== ' ') {
-      items.push(objItem);
-      localStorage.setItem('todo-list', JSON.stringify(items));
-      this.todoInputBox.value = '';
-      this.itemList();
-    }
+    checkBox.addEventListener('click', (event) => {
+      this.updateItem({ event, type: 'checkbox' });
+    });
+    optIcon.addEventListener('click', this.editDelete);
+    label.addEventListener('click', this.editDelete);
   };
 }

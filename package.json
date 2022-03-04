@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --env=jsdom --coverage",
+    "watch": "jest --env=jsdom --watch *.js",
     "dev": "webpack --mode development",
     "start": "webpack serve --mode development"
   },

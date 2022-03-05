@@ -1,5 +1,6 @@
 import './style.css';
-import Todo from './add-remove.js';
+import Todo from './todo-controller.js';
+import { multipleDelete } from './components/pure-mtd.js';
 
 const addRemoveObj = new Todo();
 const { form } = addRemoveObj;
@@ -10,29 +11,8 @@ addRemoveObj.todoInputBox.focus();
 const refreshIcon = document.getElementById('refresh-link');
 refreshIcon.addEventListener('click', () => addRemoveObj.itemList());
 
-const multipleDelete = (event) => {
-  const checkedItems = document.querySelectorAll('input[type=checkbox]:checked');
-  const filtIds = [];
-  checkedItems.forEach((item, index) => {
-    const [, id] = item.id.split('-');
-    filtIds.push(+id);
-  });
-  let itemList = [];
-  try {
-    itemList = JSON.parse(localStorage.getItem('todo-list'));
-  } catch (e) {
-    throw new Error(`Error occured: ${e}`);
-  }
-  itemList = itemList.filter((val, index) => filtIds.indexOf(val.index) === -1);
-  itemList.forEach((val, index) => {
-    val.index = index + 1;
-  });
-  localStorage.setItem('todo-list', JSON.stringify(itemList));
-
-  addRemoveObj.itemList();
-};
-
 const clearAllElement = document.getElementById('clear-completed');
-clearAllElement.addEventListener('click', (event) => {
-  multipleDelete(event);
+clearAllElement.addEventListener('click', () => {
+  multipleDelete();
+  addRemoveObj.itemList();
 });

@@ -7,10 +7,16 @@
     <title>Todo List</title>
 <script defer src="index.js"></script></head>
 <body>
-    <div class="main-cont">
+    <header>
+        <nav>
+            <a href="#"><em>Home</em></a>
+        </nav>
+    </header>
+    <section class="main-cont">
+        <h1>Todo Task</h1>
         <ul id="list-cont">
             <li class="list-header prev-item">
-                <h4>To Do List</h4>
+                <h2>Today</h2>
                 <a href="javascript:void(0)" id="refresh-link"><i class="fa fa-refresh"></i></a>
             </li>
             <li class="input-box prev-item">
@@ -23,6 +29,6 @@
         <div class="reset-box">
             <a href="javascript:void(0)" id="clear-completed">Clear all completed</a>
         </div>
-    </div>
+    </section>
 </body>
 </html>

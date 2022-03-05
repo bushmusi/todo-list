@@ -7,7 +7,8 @@
     "test": "jest --env=jsdom --coverage",
     "watch": "jest --env=jsdom --watch *.js",
     "dev": "webpack --mode development",
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode development"
   },
   "repository": {
     "type": "git",

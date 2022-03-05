@@ -1,10 +1,10 @@
-import addVal from './components/add-val.js';
-import domElement from './components/append-li.js';
-import deleteLi from './components/delete-val.js';
+import addVal from './components.js/add-val.js';
+import domElement from './components.js/append-li.js';
+import deleteLi from './components.js/delete-val.js';
 import {
   getActiveItem, makeEditable,
   updateCheckboxDom, updateListDom, getLocalStorage,
-} from './components/pure-mtd.js';
+} from './components.js/pure-mtd.js';
 
 export default class Todo {
   constructor() {

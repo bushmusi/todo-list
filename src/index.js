@@ -1,6 +1,6 @@
 import './style.css';
 import Todo from './todo-controller.js';
-import { multipleDelete } from './components/pure-mtd.js';
+import { multipleDelete } from './components.js/pure-mtd.js';
 
 const addRemoveObj = new Todo();
 const { form } = addRemoveObj;
